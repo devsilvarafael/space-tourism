@@ -7,7 +7,7 @@ import {ItemDescription} from "./ItemDescription.jsx";
 import {PlanetTravelDetails} from "./PlanetTravelDetails.jsx";
 
 export const DataViewer = ({data, dataViewerConfig}) => {
-    const reverse = dataViewerConfig.reverseItemsOnTablet && 'md:flex-col-reverse flex-1 -mb-6'
+    const reverse = dataViewerConfig.reverseItemsOnTablet && 'md:flex-col-reverse flex-1 -mb-4'
     const [selectedItem, setSelectedItem] = useState(0)
 
     const updateSelectedItem = (index) => {
