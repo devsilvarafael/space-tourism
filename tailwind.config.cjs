@@ -8,7 +8,8 @@ module.exports = {
         extend: {
             fontFamily: {
                 'body': ['Barlow Condensed', 'sans-serif'],
-                'heading': ['Bellefair', 'sans-serif']
+                'heading': ['Bellefair', 'sans-serif'],
+                'barlow': ['Barlow', 'sans-serif']
             },
             colors: {
                 'dark': '#0B0D17',
