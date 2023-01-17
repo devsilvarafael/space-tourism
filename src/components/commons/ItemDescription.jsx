@@ -7,7 +7,7 @@ export const ItemDescription = ({level, data, itemDescriptionConfig}) => {
             level = 'text-heading-2'
             break;
         case 3:
-            level = 'text-heading-3 md:text-[150px]'
+            level = `text-heading-3 ${itemDescriptionConfig.headingSize}`
             break;
         case 4:
             level = 'text-heading-4'
@@ -22,7 +22,7 @@ export const ItemDescription = ({level, data, itemDescriptionConfig}) => {
 
     return (
 
-        <div className={"text-center w-full flex flex-col items-center min-h-[200px]"}>
+        <div className={"text-center w-full flex flex-col items-center min-h-[250px] md:mt-8"}>
             {itemDescriptionConfig && <p className={`text-light-blue uppercase tracking-widest ${itemDescriptionConfig.size} text-base mb-1 md:mb-4`}>{itemDescriptionConfig.beforeTitle}</p>}
             {data.role && <p className={"text-gray-400 uppercase md:mb-1 md:text-2xl font-heading"}>{data.role}</p>}
             <span className={`text-white uppercase ${level} font-heading`}>{data.name || data.title}</span>

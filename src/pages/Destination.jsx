@@ -12,6 +12,9 @@ export default function Destination() {
         imageConfig: {
             variant: 'medium'
         },
+        itemDescriptionConfig: {
+          headingSize: 'text-[80px]'
+        },
         headingLevel: 3,
     }
 

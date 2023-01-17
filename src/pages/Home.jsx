@@ -18,6 +18,7 @@ export default function Home() {
                 level={3}
                 itemDescriptionConfig={{
                     beforeTitle: homeData.subtitle,
+                    headingSize: 'md:text-[150px]',
                     size: 'md:text-xl'
                 }}
             />
