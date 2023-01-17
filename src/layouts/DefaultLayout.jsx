@@ -1,8 +1,8 @@
 import {Menu} from "../components/Menu/Menu.jsx";
-export const DefaultLayout = ({ children, background }) => {
+export const DefaultLayout = ({ children, background, space }) => {
     return (
-        <div className={`container bg-cover ${background} p-6 flex items-center flex-col`}>
-            <header className={"container"}>
+        <div className={`${background} bg-cover p-4 min-h-screen flex flex-col items-center ${space && 'justify-around'}`}>
+            <header className={"container fixed top-0 p-6"}>
                 <Menu/>
             </header>
             {children}
