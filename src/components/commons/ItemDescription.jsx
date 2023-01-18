@@ -22,7 +22,7 @@ export const ItemDescription = ({level, data, itemDescriptionConfig}) => {
 
     return (
 
-        <div className={"text-center w-full flex flex-col items-center min-h-[250px] md:mt-8"}>
+        <div className={"text-center w-full flex flex-col items-center min-h-[210px]"}>
             {itemDescriptionConfig && <p className={`text-light-blue uppercase tracking-widest ${itemDescriptionConfig.size} text-base mb-1 md:mb-4`}>{itemDescriptionConfig.beforeTitle}</p>}
             {data.role && <p className={"text-gray-400 uppercase md:mb-1 md:text-2xl font-heading"}>{data.role}</p>}
             <span className={`text-white uppercase ${level} font-heading`}>{data.name || data.title}</span>

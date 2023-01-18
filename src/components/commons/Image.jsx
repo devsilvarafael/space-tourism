@@ -15,8 +15,8 @@ export const Image = ({ src, alt, imageConfig }) => {
     }
 
     return (
-        <figure className={`w-full h-full ${border} ${variant}`}>
-            <img src={`./src/${src}`} alt={alt} className={`max-h-56 md:max-h-full m-auto`}/>
+        <figure className={`w-full h-full ${border} `}>
+            <img src={`./src/${src}`} alt={alt} className={`${variant} max-h-56 md:max-h-full m-auto`}/>
         </figure>
     )
 }

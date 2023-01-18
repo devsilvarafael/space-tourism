@@ -1,6 +1,7 @@
 export const Tabs = ({tabsConfig, items, selected, updateInfo}) => {
     let tabSize;
 
+    // Needs refactor.
     switch(tabsConfig.variant) {
         case "numbered":
             tabSize = 'max-w-[9.5rem] md:max-w-[13.12rem]';
@@ -11,6 +12,7 @@ export const Tabs = ({tabsConfig, items, selected, updateInfo}) => {
         default: tabSize = 'max-w-[14.81rem]'
     }
 
+    // This function needs refactor.
     function checkStyle(index) {
         if(tabsConfig.variant === "numbered") {
             return `${selected === index ? 'bg-white text-black' : 'bg-transparent outline outline-1 outline-gray-500'}
