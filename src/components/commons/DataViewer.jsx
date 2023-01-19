@@ -17,7 +17,7 @@ export const DataViewer = ({data, dataViewerConfig}) => {
     const item = data[selectedItem];
 
     return (
-        <section className={`flex flex-col items-center ${reverse}`}>
+        <main className={`flex flex-col items-center ${reverse}`}>
             <Image
                 src={item.images.png || item.images.landscape}
                 alt={item.name} screen={dataViewerConfig.imageFullSize}
@@ -26,9 +26,9 @@ export const DataViewer = ({data, dataViewerConfig}) => {
 
             <Tabs
                 items={data}
-                selected={selectedItem}
-                updateInfo={updateSelectedItem}
                 tabsConfig={dataViewerConfig.tabsConfig}
+                handleUpdateSelectedTab={updateSelectedItem}
+                selectedTab={selectedItem}
             />
             <ItemDescription
                 data={item}
@@ -38,7 +38,7 @@ export const DataViewer = ({data, dataViewerConfig}) => {
 
             {data[selectedItem].distance &&
                 <PlanetTravelDetails distance={data[selectedItem].distance} travel={data[selectedItem].travel}/>}
-        </section>
+        </main>
     )
 }
 

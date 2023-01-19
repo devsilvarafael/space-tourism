@@ -10,14 +10,12 @@ import {menuItems} from "./Items.jsx";
 export const Menu = () => {
     const [selected, setSelected] = useState(0);
     const [openMenu, setOpenMenu] = useState(false);
+    const width  = window.outerWidth;
 
+    console.log(width)
     const handleOpenMenu = () => {
         setOpenMenu(!openMenu)
     }
-
-    const memoizedIndex = useMemo(() => {
-        return selected;
-    }, [selected]);
 
    const handleChangeSelectedOption = (index) => {
         setSelected(index)
@@ -30,7 +28,7 @@ export const Menu = () => {
             </a>
 
 
-            {openMenu ? (
+            {width < 765 && openMenu ? (
                 <Fragment>
                     <AiOutlineClose size={30} className={"text-light-blue z-40"} onClick={handleOpenMenu}/>
                     <aside
@@ -53,7 +51,7 @@ export const Menu = () => {
                     </aside>
                 </Fragment>
 
-            ) : <HamburgerIcon size={30} className={"text-light-blue"} onClick={handleOpenMenu}/>}
+            ) : <aside><HamburgerIcon size={30} className={"text-light-blue"} onClick={handleOpenMenu}/></aside>}
         </nav>
     )
 }
