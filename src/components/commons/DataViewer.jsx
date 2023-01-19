@@ -2,7 +2,7 @@ import {Fragment, useState} from "react";
 
 import {Headline} from "./Headline.jsx";
 import {Image} from "./Image.jsx";
-import {Tabs} from "./Tabs.jsx";
+import {Tabs} from "../Tabs/Tabs.jsx";
 import {ItemDescription} from "./ItemDescription.jsx";
 import {PlanetTravelDetails} from "./PlanetTravelDetails.jsx";
 

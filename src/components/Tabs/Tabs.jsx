@@ -1,5 +1,5 @@
-import TabsSize from "../Tabs/TabsSize";
-import TabItemVariant from "../Tabs/TabItemVariant.jsx";
+import TabsSize from "./TabsSize.js";
+import TabItemVariant from "./TabItemVariant.jsx";
 import {cloneElement, Fragment} from "react";
 
 export const Tabs = ({tabsConfig, items, selectedTab, handleUpdateSelectedTab}) => {
