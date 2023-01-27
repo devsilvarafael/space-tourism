@@ -16,13 +16,6 @@
         const [selected, setSelected] = useState(initialLocalStorage);
         const [menuIsOpen, setMenuIsOpen] = useState(false);
 
-        useEffect(() => {
-            const storedSelected = localStorage.getItem("selected");
-            if (storedSelected) {
-                setSelected(parseInt(storedSelected));
-            }
-        }, [selected]);
-
         // Breakpoints for mobile
         const {width} = useWindowSize();
         const isMobile = width < 810;
