@@ -1,72 +1,87 @@
-import starLogo from "../../assets/shared/logo.svg";
+    import starLogo from "../../assets/shared/logo.svg";
 
-import {GiHamburgerMenu as HamburgerIcon} from "react-icons/gi";
-import {Fragment, useState} from "react";
-import {AiOutlineClose as CloseIcon} from "react-icons/ai";
+    import {GiHamburgerMenu as HamburgerIcon} from "react-icons/gi";
+    import {Fragment, useEffect, useState} from "react";
+    import {AiOutlineClose as CloseIcon} from "react-icons/ai";
 
-import {Link} from "react-router-dom";
-import {menuItems} from "./Items.jsx";
-import useWindowSize from "../../hooks/useWindowSize.js";
-import {Headline} from "../commons/Headline.jsx";
+    import {Link, useParams} from "react-router-dom";
+    import {menuItems} from "./Items.jsx";
+    import useWindowSize from "../../hooks/useWindowSize.js";
+    import {Headline} from "../commons/Headline.jsx";
+    import {MenuContainer} from "./MenuContainer.jsx";
 
-const menuScreenStyle = {
-    mobile: {
-        aside: "z-30 w-[240px] h-full absolute right-0 backdrop-blur-md backdrop-brightness-90 bg-white/5 top-0 text-white",
-        ul: "mt-32 h-[276px] min-w-full flex flex-col justify-center"
+    export const Menu = () => {
+        // State management for menu
+        const initialLocalStorage = parseInt(localStorage.getItem("selected"))
+        const [selected, setSelected] = useState(initialLocalStorage);
+        const [menuIsOpen, setMenuIsOpen] = useState(false);
 
-    },
-    desktop: {
-        aside: "bg-gray-800 min-w-[450px] min-h-[96px] absolute right-0 top-0 flex justify-center items-center",
-        ul: "flex flex-row text-white justify-between w-[356px]",
+        useEffect(() => {
+            const storedSelected = localStorage.getItem("selected");
+            if (storedSelected) {
+                setSelected(parseInt(storedSelected));
+            }
+        }, [selected]);
+
+        // Breakpoints for mobile
+        const {width} = useWindowSize();
+        const isMobile = width < 810;
+        const handleMenuIsOpen = () => {
+            setMenuIsOpen(!menuIsOpen)
+        }
+
+        const handleChangeSelectedOption = (index) => {
+            setSelected(index)
+
+            localStorage.setItem("selected", index);
+        }
+
+        return (
+            <nav className={"flex flex-row justify-between items-center md:mb-10"}>
+                <div className={"mb-8 md:mb-0"}>
+                    <a>
+                        <img src={starLogo} alt={"star logo"} className={"max-w-[40px] absolute left-4 md:left-10 top-6"}/>
+                    </a>
+
+
+                    <div className={"absolute right-4 top-8 z-40"}>
+                        {isMobile && (
+                            menuIsOpen ? <CloseIcon   size={30} className={"z-40 text-light-blue"} onClick={handleMenuIsOpen}/> :
+                                <HamburgerIcon size={30} className={"z-40 text-light-blue"} onClick={handleMenuIsOpen}/>
+                        )}
+                    </div>
+                </div>
+
+
+
+                {menuIsOpen && isMobile ? (
+                    <MenuContainer menuIsOpen={menuIsOpen} isMobile={isMobile}>
+                        {menuIsOpen && menuItems.map((element, index) => (
+                            <li onClick={() => handleChangeSelectedOption(index)} key={index}
+                                className={`${selected === index && 'border-r-4 md:border-r-0 md:border-b-2'} 
+                                cursor-pointer flex flex-start mb-8 pl-6`}
+                            >
+                                <Link to={element.path}>
+                                    <Headline title={element.item.title} number={element.item.identity} menu />
+                                </Link>
+                            </li>
+                        ))}
+                    </MenuContainer>
+                ) : !isMobile && (
+                    <MenuContainer menuIsOpen={menuIsOpen} isMobile={isMobile}>
+                        {menuItems.map((element, index) => (
+                            <li onClick={() => handleChangeSelectedOption(index)} key={index}
+                                className={`${selected === index && 'border-r-4 md:border-r-0 md:border-b-2'} 
+                                cursor-pointer`}
+                            >
+                                <Link to={element.path}>
+                                    <span className={"uppercase tracking-widest"}>{element.item.title}</span>
+                                </Link>
+                            </li>
+                        ))}
+                    </MenuContainer>
+                )}
+
+            </nav>
+        )
     }
-}
-
-export const Menu = () => {
-    const [selected, setSelected] = useState(0);
-    const [menuIsOpen, setMenuIsOpen] = useState(false);
-
-    const {width} = useWindowSize();
-
-    const isMobile = width < 810;
-
-    const handleMenuIsOpen = () => {
-        setMenuIsOpen(!menuIsOpen)
-    }
-
-    const handleChangeSelectedOption = (index) => {
-        setSelected(index)
-    }
-
-    return (
-        <nav className={"flex flex-row justify-between md:mb-10"}>
-            <a>
-                <img src={starLogo} alt={"star logo"} className={"max-w-[40px] absolute left-4 md:left-10 top-6"}/>
-            </a>
-
-
-            {isMobile && (
-                menuIsOpen ? <CloseIcon   size={30} className={"z-40 text-light-blue"} onClick={handleMenuIsOpen}/> :
-                    <HamburgerIcon size={30} className={"z-40 text-light-blue"} onClick={handleMenuIsOpen}/>
-            )}
-
-            <aside className={!isMobile ? menuScreenStyle.desktop.aside : menuIsOpen && menuScreenStyle.mobile.aside}>
-                <ul className={!isMobile ? menuScreenStyle.desktop.ul : menuIsOpen && menuScreenStyle.mobile.ul}>
-                    {menuItems.map((element, index) => (
-                        <li onClick={() => handleChangeSelectedOption(index)} key={index}
-                            className={`${selected === index && 'border-r-4 md:border-r-0 md:border-b-2'} 
-                            cursor-pointer`}
-                        >
-                            <Link to={element.path}>
-                                {isMobile && (
-                                    <span>{element.item.identity}</span>
-                                )}
-                                <span className={"uppercase tracking-widest"}>{element.item.title}</span>
-                            </Link>
-                        </li>
-                    ))}
-                </ul>
-            </aside>
-
-        </nav>
-    )
-}
